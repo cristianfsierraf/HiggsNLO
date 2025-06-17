@@ -1,0 +1,440 @@
+(*****************************)
+(*** Parameters of the IDM ***)
+(*****************************)
+
+(*-------------------------*)
+(*** Internal Parameters ***)
+(*-------------------------*)
+
+M$IntPrm = {
+
+
+(*** W-Z masses ***)
+
+MZ == {
+	TeX              -> Subscript[m, Z],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> MMZ,
+	Description      -> "Z mass"},
+MW == {
+	TeX              -> Subscript[m, W],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> MMW,
+	Description      -> "W mass"},
+
+(*** quark masses to be taken running by calchep ***)
+
+MC == {
+	TeX              -> Subscript[m, c],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> MMC,
+	Description      -> "c mass"},
+
+MB == {
+	TeX              -> Subscript[m, b],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> MMB,
+	Description      -> "b mass"},
+
+MT == {
+	TeX              -> Subscript[m, t],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> MMT,
+	Description      -> "t mass"},
+
+
+(*** Electroweak interaction ***)
+
+ee == {
+	TeX              -> e,
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> Sqrt[4 Pi aEWM1],
+	InteractionOrder -> {QED, 1},
+	Description      -> "Electron charge - Photon coupling to electrons"},
+CW2 == {
+	TeX              -> Subsuperscript[c, w,2],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> (MW/MZ)^2,
+	Description      -> "Squared cosine of the weak angle"},  
+SW2 == {
+	TeX              -> Subsuperscript[s, w,2],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> 1-CW2,
+	Description      -> "Squared Sin of the weak angle"},    
+CW == {
+	TeX              -> Subscript[c, w],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> Sqrt[CW2],
+	Description      -> "Cosine of the weak angle"},  
+SW == {
+	TeX              -> Subscript[s, w],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> Sqrt[SW2],
+	Description      -> "Sine of the weak angle"},
+
+g1 == {
+	TeX              -> Subscript[g, 1],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> ee/CW,
+	Description      -> "U(1)_Y coupling constant"},
+g2 == {
+	TeX              -> Subscript[g, 2],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> ee/SW,
+	Description      -> "SU(2) coupling constant"},
+
+v == {
+	ParameterType -> Internal,
+	Value -> 1./(2^0.25 Sqrt[Gf]),
+	InteractionOrder -> {QED, -1},
+	Description -> "Higgs VEV"},
+
+(*** Yukawa couplings ***)
+yu == {
+	TeX              -> Superscript[y, u],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Indices          -> {Index[Generation]},
+	Definitions      :> {yu[i_] :> Sqrt[2] Mu[i]/v },
+	Description      -> "up-type quark Yukawa couplings"},
+
+yd == {
+	TeX              -> Superscript[y, d],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Indices          -> {Index[Generation]},
+	Definitions      :> {yd[i_] :> Sqrt[2] Md[i]/v },
+	Description      -> "down-type quark Yukawa couplings"},
+
+yl == {
+	TeX              -> Superscript[y, l],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Indices          -> {Index[Generation]},
+	Definitions      :> {yl[i_] :> Sqrt[2] Ml[i]/v },
+	Description      -> "down-type lepton Yukawa couplings"},
+
+(*** Strong  interaction ***)
+
+gs == {
+	TeX              -> Subscript[g, s],
+	ComplexParameter -> False,
+	ParameterType    -> Internal,
+	Value            -> Sqrt[4 Pi aS],
+	InteractionOrder -> {QCD, 1},
+	ParameterName    -> G,
+	Description      -> "Strong coupling constant"},
+
+(*** CKM  matrix ***)
+(* For CalcHEP use second version, the one with abs values *)
+(* CKM matrix, diagonal version *)
+(*CKM == {
+	TeX              -> Superscript[V, CKM],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Indices          -> {Index[Generation], Index[Generation]},
+	TensorClass      -> CKM,
+	Unitary          -> True,
+	Definitions      :> {CKM[i_,j_] :> 0 /;(i!=j),
+		   	     CKM[i_,j_] :> 1 /;(i==j)},
+	Description      -> "CKM-Matrix"},*)
+(* CKM matrix, absolute values only version *)
+CKM == {
+	TeX              -> Superscript[V, CKM],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Indices          -> {Index[Generation], Index[Generation]},
+	TensorClass      -> CKM,
+	Unitary          -> True,
+	Value            -> {CKM[1,1] -> 0.97428, CKM[1,2] -> 0.2253, CKM[1,3] -> 0.00347, 
+                            CKM[2,1] -> 0.2252, CKM[2,2] -> 0.97345, CKM[2,3] -> 0.0410, 
+                            CKM[3,1] -> 0.00862, CKM[3,2] -> 0.0403, CKM[3,3] -> 0.999152},
+	Description      -> "CKM-Matrix"},
+(* CKM matrix, Wolfenstein parametrisation up to lambda^3 *)
+(*CKM == {
+	TeX              -> Superscript[V, CKM],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Indices          -> {Index[Generation], Index[Generation]},
+	TensorClass      -> CKM,
+	Unitary          -> True,
+	Value            -> {CKM[1,1] -> 1 - 1/2*lamW^2, CKM[1,2] -> lamW, CKM[1,3] -> AW*lamW^3 *(rhoW - I*etaW), 
+                         CKM[2,1] -> -lamW, CKM[2,2] -> 1 - 1/2*lamW^2, CKM[2,3] -> AW*lamW^2, 
+                         CKM[3,1] -> AW*lamW^3*(1 - rhoW - I*etaW), CKM[3,2] -> -AW*lamW^2, CKM[3,3] -> 1},
+	Description      -> "CKM-Matrix"},*)
+
+
+(*** Scalar sector parameters ***)
+
+mh == {
+	TeX              -> Subscript[m, h],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value		 -> mmh,
+	Description      -> "Higgs boson mass internal"},
+
+MH0 == {
+	TeX              -> Subscript[m, H0],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value		 -> mmH0,
+	Description      -> "Dark scalar mass internal"},
+
+MA0 == {
+	TeX              -> Subscript[m, A],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value		 -> mmA0,
+	Description      -> "Pseudoscalar mass internal"},
+
+MHch == {
+	TeX              -> Subscript[m, Hch],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value		 -> mmHch,
+	Description      -> "Charged scalar mass internal"},
+
+mu1 == {
+	TeX              -> Subscript[\[Mu], 1],
+	ParameterType    -> Internal,
+	ComplexParameter -> True,
+	Value            -> Sqrt[-1/2*mh^2],
+	Description      -> "higgs mass parameter"},
+
+mu2 == {
+	TeX              -> Subscript[\[Mu], 2],
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> Sqrt[MH0^2 - lamL v^2],
+	Description      -> "ID mass parameter"},
+
+lam == {
+	TeX              -> Subscript[\[Lambda], 1],
+        InteractionOrder -> {QED,2},
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> mh^2/(2 v^2),
+	Description      -> "higgs quartic self-coupling"},
+
+lam3 == {
+	TeX              -> Subscript[\[Lambda], 3],
+        InteractionOrder -> {QED,2},
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> 2 (lamL v^2 + MHch^2 - MH0^2)/v^2,
+	Description      -> "lambda 3"},
+
+lam4 == {
+	TeX              -> Subscript[\[Lambda], 4],
+        InteractionOrder -> {QED,2},
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> (MA0^2 + MH0^2 - 2 MHch^2)/v^2,
+	Description      -> "lambda 4"},
+
+lam5 == {
+	TeX              -> Subscript[\[Lambda], 5],
+        InteractionOrder -> {QED,2},
+	ParameterType    -> Internal,
+	ComplexParameter -> False,
+	Value            -> (MH0^2 - MA0^2)/v^2,
+	Description      -> "lambda 5"},
+
+(*** Gluon fusion loop coefficient ***)
+
+GH == {
+ TeX              -> Subscript[G, H],
+	ParameterType    -> Internal,
+	InteractionOrder -> {HIG, 1},
+	Value            -> -gs^2/(4*Pi(3*Pi*v)) sert[(mmh/2/MMT)^2] }
+
+}
+
+(*-------------------------*)
+(*** External Parameters ***)
+(*-------------------------*)
+
+M$ExtPrm = {
+
+(*** Electroweak interaction ***)
+
+aEWM1== {
+	TeX              -> Subsuperscript[\[Alpha],w,-1],
+	ParameterType    -> External,
+	Value		 -> 1./128.9, 
+	InteractionOrder -> {QED, -2},
+	Description      -> "EW coupling constant at the Z pole"},
+Gf == {
+	TeX              -> Subscript[G,F],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 1.16637*10^(-5),
+	InteractionOrder -> {QED, 2},
+	Description      -> "Fermi constant"},
+MMZ == {    
+	TeX              -> Subscript[m,Z],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 91.1876,
+	Description      -> "Z pole mass"}, 
+
+MMW == {    
+	TeX              -> Subscript[m,W],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 79.947,
+	Description      -> "W pole mass"}, 
+MMC == {    
+	TeX              -> Subscript[m,c],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 1.2,
+	Description      -> "c mass at mc, MSbar"}, 
+
+MMB == {    
+	TeX              -> Subscript[m,b],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 4.23,
+	Description      -> "b mass at mb, MSbar"}, 
+MMT == {    
+	TeX              -> Subscript[m,t],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 175,
+	Description      -> "t pole mass"}, 
+
+(*** Strong  interaction ***)
+
+aS == {
+	TeX              -> Subscript[\[Alpha],s],
+	ParameterType    -> External,
+	Value		 -> 0.1172,
+	InteractionOrder -> {QCD, 2},
+	Description      -> "Strong coupling constant at the Z pole."},
+QS == {
+	TeX              -> Subscript[Q,s],
+	ParameterType    -> External,
+	Value		 -> 100.,
+	InteractionOrder -> {QCD, 1},
+	Description      -> "QCD scale for running quark masses in CalcHEP"},
+   
+(*** Scalar  sector ***)
+
+lamL == {
+	TeX              -> Subscript[\[Lambda], L],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 0.0001,
+	Description      -> "lambda L"},
+
+lam2 == {
+	TeX              -> Subscript[\[Lambda], 2],
+        InteractionOrder -> {QED,2},
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 0.0005,
+	Description      -> "Inert doublet quartic self-coupling"},
+
+mmh == {
+	TeX              -> Subscript[m, h],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 100,
+	Description      -> "Higgs boson mass"},
+
+mmH0 == {
+	TeX              -> Subscript[m, H0],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 70000,
+	Description      -> "Dark scalar mass"},
+
+mmA0 == {
+	TeX              -> Subscript[m, A],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 120000,
+	Description      -> "Pseudoscalar mass"},
+
+mmHch == {
+	TeX              -> Subscript[m, Hch],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 200000,
+	Description      -> "Charged scalar mass"},
+
+(*** CKM matrix parameters, Wolfenstein parametrization, lambda^3 approximation ***)
+
+lamW == {
+	TeX              -> Subscript[\[Lambda], W],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 0.225,
+	Description      -> "CKM lambda parameter"},
+AW == {
+	TeX              -> Subscript[A, W],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 0.825,
+	Description      -> "CKM A parameter"},
+rhoW == {
+	TeX              -> Subscript[\[Lambda], W],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 0.163,
+	Description      -> "CKM rho parameter"},
+etaW == {
+	TeX              -> Subscript[\[Lambda], W],
+	ParameterType    -> External,
+	ComplexParameter -> False,
+	Value		 -> 0.357,
+	Description      -> "CKM eta parameter"}
+	
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

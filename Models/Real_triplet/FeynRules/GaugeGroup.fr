@@ -1,0 +1,25 @@
+(********************)
+(*** Gauge Groups ***)
+(********************)
+
+M$GaugeGroups = {
+
+U1Y == {
+	Abelian -> True,
+	GaugeBoson -> B,
+	Charge -> Y,
+	CouplingConstant -> g1},
+
+SU2L == {
+	Abelian -> False,
+	GaugeBoson -> Wi,
+	StructureConstant -> Eps,
+	CouplingConstant -> g2},
+
+SU3C == {
+	Abelian -> False,
+	GaugeBoson -> G,
+	StructureConstant -> f,
+	Representations -> {T, Colour},
+	CouplingConstant -> gs}
+}

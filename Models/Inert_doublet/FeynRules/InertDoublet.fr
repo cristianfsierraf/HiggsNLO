@@ -1,0 +1,48 @@
+(**************************************************************)
+(**************************************************************)
+(****** FeynRules model file for the Inert Doublet model ******)
+(******                                                  ******)
+(****** Authors: A. Goudelis, B. Herrmann, O. Stal       ******)
+(******                                                  ******)
+(****** Feel free to use this model file!                ******)
+(****** If you do so, please cite  arXiv:1303.3010       ******)
+(**************************************************************)
+(**************************************************************)
+
+M$ModelName = "InertDoublet";
+
+
+M$Information = {Authors -> {"Andreas Goudelis, Bjoern Herrmann, Oscal Stal"}, 
+                 Version -> "1.0",
+                 Date -> "04. 10. 2013",
+                 Institutions -> {"LAPTh-Annecy, Oscar Klein Center-Stockholm"},
+                 Emails -> {"andreas.goudelis@lapth.cnrs.fr"}
+	        };
+
+(*** Choose Feynman or Unitary gauge ***)
+FeynmanGauge = False;
+
+(*** Index definitions ***)
+IndexRange[ Index[Generation] ] = Range[3]
+IndexRange[ Index[Colour] ] = NoUnfold[Range[3]]
+IndexRange[ Index[Gluon] ] = NoUnfold[Range[8]]
+IndexRange[ Index[SU2W] ] = Range[3]
+
+IndexStyle[Colour, i]
+IndexStyle[Generation, f]
+IndexStyle[Gluon ,a]
+IndexStyle[SU2W ,k]
+
+(*** Load all necessary info ***)
+Get["GaugeGroup.fr"];
+Get["Parameters.fr"];
+Get["SMParts.fr"];
+Get["Scalars.fr"];
+Get["Lagrangian.fr"];
+
+M$Parameters = Join[M$IntPrm, M$ExtPrm];
+
+M$ClassesDescription = Join[M$ClassesDescription, M$ScalarFields];
+
+
+

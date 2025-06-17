@@ -1,0 +1,95 @@
+(*********************)
+(*** SCALAR FIELDS ***)
+(*********************)
+
+M$ScalarFields = {
+
+(*----------------------------------*)
+(*** Standard model scalar fields ***)
+(*----------------------------------*)
+
+(* physical Higgs: Q = 0 *) 
+S[1] == {
+	ClassName        -> h,
+	SelfConjugate    -> True,
+	Indices          -> {},
+	Mass             -> {mh, Internal},
+	Width            -> {Wh, 1.},
+	ParticleName     -> "h",
+	PDG              -> 25,
+	PropagatorLabel  -> "h",
+	PropagatorType   -> ScalarDash,
+	PropagatorArrow  -> None},
+
+(* neutral Goldstone *)
+S[2] == {
+        ClassName -> G0,
+	SelfConjugate -> True,
+	Mass -> {MZ, Internal},
+	Width -> WG0,
+	PropagatorLabel -> "G0",
+	PropagatorType -> D,
+	PropagatorArrow -> None,
+	ParticleName ->"G0",
+	PDG -> 250,
+	FullName -> "G0",
+	Goldstone -> Z },
+
+(* charged Goldstones *)
+S[3] == {
+	ClassName -> Gch,
+	SelfConjugate -> False,
+	Mass -> {MW, Internal},
+	Width -> WGp,
+	PropagatorLabel -> "Gch",
+	PropagatorType -> D,
+	PropagatorArrow -> None,
+	ParticleName ->"G+",
+	AntiParticleName ->"G-",
+	PDG -> 251,
+	FullName -> "Gch",
+	TeXClassName -> "Gch",
+	TeXParticleName -> "G^+",
+	TeXAntiParticleName -> "G^-",
+	Goldstone -> W,
+	QuantumNumbers -> {Q -> 1}}, 
+
+
+(*-----------------------*)
+(*** Triplet scalar fields ***)
+(*-----------------------*)
+
+(* NB: Tildes in the ParticleName's, to comply to the CalcHEP notation *)
+
+(* Neutral scalar *)
+S[4] == {
+	ClassName        -> H0,
+	SelfConjugate    -> True,
+	Indices          -> {},
+	Mass             -> {MH0, Internal},
+	Width            -> {WH0, 0.},
+	ParticleName     -> "~H0",
+	PDG              -> 35,
+	PropagatorLabel  -> "H0",
+	PropagatorType   -> ScalarDash,
+	PropagatorArrow  -> None},
+
+(* Charged scalar *)
+S[6] == {
+	ClassName        -> Hch,
+	SelfConjugate    -> False,
+	Indices          -> {},
+	QuantumNumbers   -> {Q -> 1},
+	Mass             -> {MHch, Internal},
+	Width            -> {WHch, 1.},
+	ParticleName     -> "~H+",
+	AntiParticleName -> "~H-",
+	PDG              -> 37,
+	PropagatorLabel  -> "Hch",
+	PropagatorType   -> ScalarDash,
+	PropagatorArrow  -> Forward}
+
+
+
+};
+
