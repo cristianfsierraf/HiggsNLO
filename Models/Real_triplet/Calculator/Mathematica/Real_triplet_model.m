@@ -10,8 +10,8 @@
 (*                     Manuel Diaz*)*)
 (*(*Date: 04-07-2025*)*)
 
+(* ::Section:: *)
 
-(* ::Subsection::Closed:: *)
 (*Load FeynCalc*)
 
 
@@ -31,11 +31,16 @@
 (*FAPatch[PatchModelsOnly->True]*)
 
 
-(* ::Subtitle::Closed:: *)
+(* ::Title:: *)
+(*Higgsstrahlung@NLO*)
+
+
+(* ::Chapter::Closed:: *)
 (*Self-energies*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Section:: *)
+
 (*H*)
 
 
@@ -54,11 +59,13 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]HHAmp[0]=FCFAConvert[CreateFeynAmp[\[CapitalSigma]HHDiag,PreFactor->1,Truncated->True],*)
+
+(*\[CapitalSigma]HHAmp[0]=FCFAConvert[CreateFeynAmp[\[CapitalSigma]HHDiag,PreFactor->-I,Truncated->True],*)
 (*IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},*)
 (*Contract->True,LoopMomenta->{q},ChangeDimension->D,*)
 (*UndoChiralSplittings->True,List->False,DropSumOver->False,*)
-(*LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{lam3->\[Lambda]3,MH0->MH,MHch->MH}]/.FCGV[x_String]:>ToExpression[x]//*)
+(*LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{lam3->\[Lambda]3,MH0->MH,MHch->MH}]//*)
+
 (*DiracSimplify[#,DiracSubstitute67->True]&//FCGVToSymbol//DiracSimplify;*)
 
 
@@ -79,14 +86,16 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]HH[0]=(-I)/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]HHAmp[1]];*)
+
+(*\[CapitalSigma]HH[0]=1/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]HHAmp[1]];*)
 
 
 (* ::Input:: *)
 (*\[CapitalSigma]HH[0]//FullSimplify//TraditionalForm*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsection:: *)
+
 (*Renormalization in MSbar scheme*)
 
 
@@ -121,8 +130,7 @@
 (* ::Input:: *)
 (*\[CapitalSigma]HHatFors=\[CapitalSigma]HHat[1]/.kSquare->s;*)
 
-
-(* ::Subsection::Closed:: *)
+(* ::Section:: *)
 (*ZZ*)
 
 
@@ -135,7 +143,8 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]ZZAmp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]ZZDiag,PreFactor->1,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}]/.FCGV[x_String]:>ToExpression[x],DiracSubstitute67->True]/.gc38->(FCGV["CW"]*FCGV["EL"])/FCGV["SW"]//DiracSimplify//FCGVToSymbol;*)
+(*\[CapitalSigma]ZZAmp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]ZZDiag,PreFactor->-I,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}],DiracSubstitute67->True]/.gc38->(FCGV["CW"]*FCGV["EL"])/FCGV["SW"]//DiracSimplify//FCGVToSymbol;*)
+
 
 
 (* ::Input:: *)
@@ -151,7 +160,9 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]ZZ=(-I)/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]ZZAmp[1]]//ChangeDimension[#,4]&;*)
+
+(*\[CapitalSigma]ZZ=1/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]ZZAmp[1]];*)
+
 
 
 (* ::Input:: *)
@@ -163,8 +174,8 @@
 (*\[CapitalSigma]ZZT[0]=Contract[TransverseProjector*\[CapitalSigma]ZZ];*)
 (*\[CapitalSigma]ZZT[0]//Simplify//TraditionalForm*)
 
+(* ::Subsection:: *)
 
-(* ::Subsubsection:: *)
 (*Renormalization in MSbar scheme*)
 
 
@@ -197,7 +208,16 @@
 
 
 (* ::Input:: *)
-(*(* Derivative of Subsuperscript[Overscript[\[CapitalSigma], ^], T, ZZ](k^2) *)*)
+
+(*(* Derivative of \!\(\**)
+(*SubsuperscriptBox[*)
+(*OverscriptBox["\[CapitalSigma]", "^"], *)
+(*StyleBox["T", "TI"], *)
+(*StyleBox[*)
+(*RowBox[{"Z", "Z"}], "TI"]](\**)
+(*SuperscriptBox[*)
+(*StyleBox["k", "TI"], "2"])\) *)*)
+
 
 
 (* ::Input:: *)
@@ -211,9 +231,7 @@
 (* ::Input:: *)
 (*D\[CapitalSigma]ZZTHatforMZ2=D\[CapitalSigma]ZZTHat[0]/.kSquare->MZ^2;*)
 
-
-(* ::Subsection::Closed:: *)
-(*\[Gamma]Z*)
+(* ::Section:: *)
 
 
 (* ::Input:: *)
@@ -224,8 +242,7 @@
 (*Paint[\[CapitalSigma]\[Gamma]ZDiag,ColumnsXRows->{2,1},Numbering->None];*)
 
 
-(* ::Input:: *)
-(*\[CapitalSigma]\[Gamma]ZAmp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]\[Gamma]ZDiag,PreFactor->1,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}]/.FCGV[x_String]:>ToExpression[x],DiracSubstitute67->True]/.gc11->FCGV["EL"]/.gc38->(FCGV["CW"]*FCGV["EL"])/FCGV["SW"]//DiracSimplify//FCGVToSymbol;*)
+(*\[CapitalSigma]\[Gamma]ZAmp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]\[Gamma]ZDiag,PreFactor->-I,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}],DiracSubstitute67->True]/.gc11->FCGV["EL"]/.gc38->(FCGV["CW"]*FCGV["EL"])/FCGV["SW"]//DiracSimplify//FCGVToSymbol;*)
 
 
 (* ::Input:: *)
@@ -237,7 +254,8 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]\[Gamma]Z=(-I)/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]\[Gamma]ZAmp[1]];*)
+
+(*\[CapitalSigma]\[Gamma]Z=1/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]\[Gamma]ZAmp[1]];*)
 
 
 (* ::Input:: *)
@@ -249,7 +267,8 @@
 (*\[CapitalSigma]\[Gamma]ZT[0]//Simplify//TraditionalForm*)
 
 
-(* ::Subsubsection::Closed:: *)
+
+(* ::Subsection:: *)
 (*Renormalization in MS bar scheme*)
 
 
@@ -281,7 +300,7 @@
 (*\[CapitalSigma]\[Gamma]ZTHatFors=\[CapitalSigma]\[Gamma]ZTHat[1]/.kSquare->s;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Section:: *)
 (*\[Gamma]\[Gamma]*)
 
 
@@ -294,7 +313,8 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]\[Gamma]\[Gamma]Amp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]\[Gamma]\[Gamma]Diag,PreFactor->1,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}]/.FCGV[x_String]:>ToExpression[x],DiracSubstitute67->True]/.gc11->FCGV["EL"]//DiracSimplify//FCGVToSymbol;*)
+(*\[CapitalSigma]\[Gamma]\[Gamma]Amp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]\[Gamma]\[Gamma]Diag,PreFactor->-I,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}],DiracSubstitute67->True]/.gc11->FCGV["EL"]//DiracSimplify//FCGVToSymbol;*)
+
 
 
 (* ::Input:: *)
@@ -306,7 +326,7 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]\[Gamma]\[Gamma]=(-I)/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]\[Gamma]\[Gamma]Amp[1]];*)
+(*\[CapitalSigma]\[Gamma]\[Gamma]=1/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]\[Gamma]\[Gamma]Amp[1]];*)
 
 
 (* ::Input:: *)
@@ -316,14 +336,10 @@
 (* ::Input:: *)
 (*\[CapitalSigma]\[Gamma]\[Gamma]T[0]=Contract[TransverseProjector*\[CapitalSigma]\[Gamma]\[Gamma]];*)
 
+(*\[CapitalSigma]\[Gamma]\[Gamma]T[0]//FullSimplify//TraditionalForm*)
 
-(* ::Input:: *)
-(*%//FullSimplify//TraditionalForm*)
-
-
-(* ::Subsubsection::Closed:: *)
+(* ::Subsection:: *)
 (*Renormalization in MS bar scheme*)
-
 
 (* ::Input:: *)
 (*\[CapitalSigma]\[Gamma]\[Gamma]T[1]=\[CapitalSigma]\[Gamma]\[Gamma]T[0]/.Pair[ Momentum[k], Momentum[k]]->kSquare;*)
@@ -342,7 +358,14 @@
 
 
 (* ::Input:: *)
-(*(* Derivative of Subsuperscript[Overscript[\[CapitalSigma], ^], T, \[Gamma]\[Gamma]](k^2) *)*)
+
+(*(* Derivative of \!\(\**)
+(*SubsuperscriptBox[*)
+(*OverscriptBox["\[CapitalSigma]", "^"], *)
+(*StyleBox["T", "TI"], "\[Gamma]\[Gamma]"](\**)
+(*SuperscriptBox[*)
+(*StyleBox["k", "TI"], "2"])\) *)*)
+
 
 
 (* ::Input:: *)
@@ -357,7 +380,7 @@
 (*D\[CapitalSigma]\[Gamma]\[Gamma]THatFor0=D\[CapitalSigma]\[Gamma]\[Gamma]THat[0]//Series[#,{kSquare,0,0}]&//Normal;*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Section:: *)
 (*WW*)
 
 
@@ -370,7 +393,8 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]WWAmp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]WWDiag,PreFactor->1,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}]/.FCGV[x_String]:>ToExpression[x],DiracSubstitute67->True]/.gc28->(FCGV["EL"])/FCGV["SW"]/.gc24->-((FCGV["EL"])/FCGV["SW"])//DiracSimplify//FCGVToSymbol;*)
+(*\[CapitalSigma]WWAmp[0]=DiracSimplify[FCFAConvert[CreateFeynAmp[\[CapitalSigma]WWDiag,PreFactor->-I,Truncated->True],IncomingMomenta->{k},OutgoingMomenta->{k},TransversePolarizationVectors->{k},Contract->True,LoopMomenta->{q},ChangeDimension->D,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]},FinalSubstitutions->{MH0->MH,MHch->MH}],DiracSubstitute67->True]/.gc28->(FCGV["EL"])/FCGV["SW"]/.gc24->-((FCGV["EL"])/FCGV["SW"])//DiracSimplify//FCGVToSymbol;*)
+
 
 
 (* ::Input:: *)
@@ -382,18 +406,17 @@
 
 
 (* ::Input:: *)
-(*\[CapitalSigma]WW=(-I)/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]WWAmp[1]];*)
+(*\[CapitalSigma]WW=1/(2 Pi)^4PaVeLimitTo4[\[CapitalSigma]WWAmp[1]];*)
+
 
 
 (* ::Input:: *)
 (*\[CapitalSigma]WWT[0]=Contract[TransverseProjector*\[CapitalSigma]WW];*)
 
-
-(* ::Input:: *)
-(*%//FullSimplify//TraditionalForm*)
+(*\[CapitalSigma]WWT[0]//FullSimplify//TraditionalForm*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsection:: *)
 (*Renormalization in MS bar scheme*)
 
 
@@ -421,19 +444,14 @@
 (*\[CapitalSigma]WWTHatForMW2=\[CapitalSigma]WWTHat[1]/.kSquare->MW^2;*)
 
 
-(* ::Subtitle:: *)
-(*Higgsstrahlung@NLO*)
-
-
 (* ::Chapter:: *)
 (*Cross section*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*LO*)
+(* ::Subsubsection:: *)
 
-
-(* ::Subsubsection::Closed:: *)
 (*Amplitude*)
 
 
@@ -443,7 +461,8 @@
 
 
 (* ::Input:: *)
-(*Paint[diagLO,ColumnsXRows->{2,1},Numbering->None];*)
+(*Paint[diagLO,ColumnsXRows->{1,1},Numbering->None,ImageSize->{256,256} ];*)
+
 
 
 (* ::Input:: *)
@@ -455,43 +474,56 @@
 
 
 (* ::Input:: *)
-(*SetMandelstam[s,t,u,p1,p2,-k1,-k2,0,0,MZ,mh];*)
+(*SetMandelstam[s,t,u,p1,p2,-k1,-k2,ME,ME,MZ,mh];*)
+
 
 
 (* ::Input:: *)
 (*(*define the matrix element*)*)
+(*(*PreFactor is set as -I so that ampLO[0]=M^tree instead of iM^tree*)*)
 
 
 (* ::Input:: *)
-(*ampLO[0]=FCFAConvert[CreateFeynAmp[diagLO,PreFactor->1],IncomingMomenta->{p1,p2},OutgoingMomenta->{k1,k2},TransversePolarizationVectors->{k1},ChangeDimension->D,Contract->True,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]}]/.FCGV[x_String]:>ToExpression[x]//FCGVToSymbol//DiracSimplify[#,DiracSubstitute67->False]&;*)
+(*ampLO[0]=FCFAConvert[CreateFeynAmp[diagLO,PreFactor->-I],IncomingMomenta->{p1,p2},OutgoingMomenta->{k1,k2},TransversePolarizationVectors->{k1},ChangeDimension->D,Contract->True,UndoChiralSplittings->True,List->False,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu]}]//FCGVToSymbol//DiracSimplify[#,DiracSubstitute67->False]&;*)
 
 
 (* ::Input:: *)
-(*(*matrix element squared*)*)
+(*(*Check by run following code commented out: The LO amplitude is the same as M^tree in paper*)*)
 
 
 (* ::Input:: *)
-(*ampLOSquared[0]=ampLO[0]( ComplexConjugate[ampLO[0]])//FeynAmpDenominatorExplicit//FermionSpinSum[#,ExtraFactor->1/2^2]&//DiracSimplify//DoPolarizationSums[#,k1]&//FCReplaceD[#,D->4]&//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]& //DiracSimplify;*)
+(*(*ampLO[0]/.gc44->(EL^2*(v)/(2*CW^2*SW^2))/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.v->(2 SW CW MZ/EL)/.ME->0//DiracSimplify[#,DiracSubstitute67->True]&//FullSimplify*)*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Input:: *)
+(*(*Matrix element squared. Spin average 1/4 is considered here. D dim -> 4 dim*)*)
+
+
+(* ::Input:: *)
+(*ampLOSquared[0]=ampLO[0]( ComplexConjugate[ampLO[0]])//ChangeDimension[#,4]&//FeynAmpDenominatorExplicit//FermionSpinSum[#,ExtraFactor->1/2^2]&//DoPolarizationSums[#,k1]&//TrickMandelstam[#,{s,t,u,2ME^2+MZ^2+mh^2}]& //DiracSimplify;*)
+
+
+(* ::Subsubsection:: *)
+
 (*Matrix Element and cross section*)
 
 
 (* ::Input:: *)
-(*(*LO matrix element squared*)*)
+
+(*(*LO matrix element squared. We set ME=0 here*)*)
 
 
 (* ::Input:: *)
-(*MLO2aux=ampLOSquared[0]/.gc44->(EL^2*(v)/(2*CW^2*SW^2))/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.v->(2 SW CW MZ/EL)/.u->(MZ^2+mh^2-s-t)/.ME->0;*)
+(*MLO2aux=ampLOSquared[0]/.gc44->(EL^2*(v)/(2*CW^2*SW^2))/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.v->(2 SW CW MZ/EL)/.ME->0/.u->(MZ^2+mh^2-s-t);*)
+
+
+(* ::Input:: *)
+(*(*The differential cross section is given by (dSubscript[\[Sigma], LO])/(dt)\[LongEqual]1/(16\[Pi]s^2)\[LeftBracketingBar]M\[RightBracketingBar]^2 where M is the matrix element. We integrate over t and replace u from s+t+u\[LongEqual]MZ^2+mh^2*)*)
 
 
 (* ::Input:: *)
 (*MLO2[t_]:=Evaluate[MLO2aux]*)
 
-
-(* ::Input:: *)
-(*(*The differential cross section is given by d\[Sigma]LO/dt=(1/(16 Pi s^2))|M|^2 where M is the matrix element. We integrate over t and replace u from s+t+u=MZ^2+mh^2*)*)
 
 
 (* ::Input:: *)
@@ -501,18 +533,20 @@
 (* ::Input:: *)
 (*(*K\[ADoubleDot]ll\[EAcute]n function*)*)
 (* \[Kappa][x_,y_,z_]:=Sqrt[x^2+y^2+z^2-2x y-2x z-2y z];*)
-(*(*Kinematic limits for the integration in terms of \[Kappa]=Sqrt[\[Lambda]], see definition of the Mandelstam variable t and take cos\[Theta]=\[PlusMinus]1*)*)
+
+(*(*Kinematic limits for the integration in terms of \[Kappa]\[LongEqual]Sqrt[\[Lambda]], see definition of the Mandelstam variable t and take cos\[Theta]\[LongEqual]\[PlusMinus]1*)*)
+
 (*tUpper[s_]:=1/2 (MZ^2+mh^2-s+\[Kappa][s,MZ^2,mh^2]);*)
 (*tLower[s_]:=1/2 (MZ^2+mh^2-s-\[Kappa][s,MZ^2,mh^2]);*)
 
 
 (* ::Input:: *)
 (*(*LO cross section*)*)
-(*\[Sigma]LOaux=(\[Sigma]Integrated/.t->tUpper[s])- (\[Sigma]Integrated/.t->tLower[s]);*)
+(*\[Sigma]LOaux=(\[Sigma]Integrated/.t->tUpper[s])- (\[Sigma]Integrated/.t->tLower[s])//FullSimplify;*)
 
 
 (* ::Input:: *)
-(*(*Eq.(3.2) in the paper, typo in paper, missing square int he  \[Kappa] inside the parenthesis*)*)
+(*(*Eq.(3.2) in the paper, typo in paper, missing square in the \[Kappa] inside the parenthesis*)*)
 
 
 (* ::Input:: *)
@@ -527,11 +561,10 @@
 (*\[Sigma]LOaux==\[Sigma]LOliterature//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]& *)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*NLO*)
 
-
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Amplitude*)
 
 
@@ -548,7 +581,11 @@
 
 
 (* ::Input:: *)
-(*ampsNLO[0]=FCFAConvert[CreateFeynAmp[LoopDiag,PreFactor->-I/(2Pi)^D],IncomingMomenta->{p1,p2},OutgoingMomenta->{k1,k2},LoopMomenta->{q},TransversePolarizationVectors->{k1},ChangeDimension->D,UndoChiralSplittings->True,List->True,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu],\[Micro]1,\[Nu]1,\[Micro]2,\[Nu]2},FinalSubstitutions->{lam3->\[Lambda]3,MH0->MH,MHch->MH}]/.gc11->FCGV["EL"]/.gc38->(FCGV["CW"]*FCGV["EL"])/FCGV["SW"]/.gc47->-FCGV["EL"]/.FCGV[x_String]:>ToExpression[x]//DiracSimplify[#,DiracSubstitute67->False]&//FCGVToSymbol;*)
+(*(*PreFactor is set as -I so that ampsNLO[0]=Subsuperscript[M, Z^*\[Rule]Zh, vert] instead of iSubsuperscript[M, Z^*\[Rule]Zh, vert]*)*)
+
+
+(* ::Input:: *)
+(*ampsNLO[0]=FCFAConvert[CreateFeynAmp[LoopDiag,PreFactor->-I],IncomingMomenta->{p1,p2},OutgoingMomenta->{k1,k2},LoopMomenta->{q},TransversePolarizationVectors->{k1},ChangeDimension->D,UndoChiralSplittings->True,List->True,DropSumOver->False,LorentzIndexNames->{\[Micro],\[Nu],\[Micro]1,\[Nu]1,\[Micro]2,\[Nu]2},FinalSubstitutions->{lam3->\[Lambda]3,MH0->MH,MHch->MH}]/.gc11->FCGV["EL"]/.gc38->(FCGV["CW"]*FCGV["EL"])/FCGV["SW"]/.gc47->-FCGV["EL"]//DiracSimplify[#,DiracSubstitute67->False]&//FCGVToSymbol;*)
 
 
 (* ::Input:: *)
@@ -575,15 +612,7 @@
 (*ampsZZNLO[2] =Total[ampsZZNLO[1]];*)
 
 
-(* ::Input:: *)
-(*(*The LO amplitude has an "-I" prefactor:*)*)
-
-
-(* ::Input:: *)
-(*AmpLO=ComplexConjugate[-I ampLO[0]]//DiracSimplify;*)
-
-
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*e + e - Z vertex contribution*)
 
 
@@ -592,7 +621,16 @@
 
 
 (* ::Input:: *)
-(*(*Looking at equation 3.8 the PaVe functions factorize so we do not have to look at all diagrams to reproduce the calculation:*)*)
+(*(*The LO amplitude without taking ME->0*)*)
+
+
+(* ::Input:: *)
+(*AmpLO=ampLO[0]//DiracSimplify[#,DiracSubstitute67->False]&;*)
+
+
+(* ::Input:: *)
+(*(*The NLO amplitude without taking ME->0, written in PaVe form*)*)
+
 
 
 (* ::Input:: *)
@@ -608,19 +646,21 @@
 
 
 (* ::Input:: *)
-(*(*Product aiming to get Eq. 3.8, factor of two from 2 times real part*)*)
+(*(*Product aiming to get Eq. 3.8 in D dimension, notice 2\[GothicCapitalR][AB^*]\[LongEqual]AB^*+BA^**)*)
 
 
 (* ::Input:: *)
-(*ampsquaredZZ=2AmpNLOZZ AmpLO/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.gc44->(FCGV["EL"]^2*v)/(2*FCGV["CW"]^2*FCGV["SW"]^2)//FCGVToSymbol/.ME->0//FeynAmpDenominatorExplicit//FermionSpinSum[#,ExtraFactor->1/2^2]& //DoPolarizationSums[#,k1]&//FCReplaceD[#,D->4-2Epsilon]&//Series[#,{Epsilon,0,0}]&//Normal//ChangeDimension[#,4]&//DiracSimplify;*)
+(*ampsquaredZZ=(AmpNLOZZ ComplexConjugate[AmpLO]+AmpLO ComplexConjugate[AmpNLOZZ])/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.gc44->(EL^2*v)/(2*CW^2*SW^2)//FeynAmpDenominatorExplicit//FermionSpinSum[#,ExtraFactor->1/2^2]& //DoPolarizationSums[#,k1]&;*)
 
 
 (* ::Input:: *)
-(*(*The following Eps[Momentum[k1],Momentum[k2],Momentum[p1],Momentum[p2]]->0 gets rid of the imaginary part of the product, this is a hack for this particular case*)*)
+(*(*D dim -> 4 dim, take ME->0*)*)
+(*(*Notice: //PaVeLimitTo4[(1/(2Pi)^4)*#]& is equal to //FCReplaceD[(1/(2Pi)^D)*#,D->4-2Epsilon]&//Series[#,{Epsilon,0,0}]&//Normal*)*)
+(*(*Notice: ME->0 should be taken after DiracSimplify because it leads to new terms with ME*)*)
 
 
 (* ::Input:: *)
-(*TwoReampZZ=ampsquaredZZ/.Eps[Momentum[k1],Momentum[k2],Momentum[p1],Momentum[p2]]->0/.ME^2->0//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]&;*)
+(*TwoReampZZ=1/(2Pi)^4(PaVeLimitTo4[ampsquaredZZ]//DiracSimplify)/.ME->0//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]&;*)
 
 
 (* ::Input:: *)
@@ -632,11 +672,11 @@
 
 
 (* ::Input:: *)
-(*(*We can look at the PaVe part alone*)*)
 
+(*(*We can look at the PaVe part alone by take out the factor of TwoReampZZ*)*)
 
 (* ::Input:: *)
-(*PavepartZZaux=(1/(16 (MZ^2)  (\[Pi]^2) (SW^4) ((MZ^2-s)^2) ) EL^6 \[Lambda]3 v^2 (ga^2+gv^2)   )^-1 TwoReampZZ;*)
+(*factorPavepartZZaux=1/(16 (MZ^2)  (\[Pi]^2) (SW^4) ((MZ^2-s)^2) ) EL^6 \[Lambda]3 v^2 (ga^2+gv^2);*)
 
 
 (* ::Input:: *)
@@ -644,24 +684,15 @@
 
 
 (* ::Input:: *)
-(*PavepartZZaux=PavepartZZaux/.u->MZ^2+mh^2-s-t//PaVeReduce;*)
+(*PavepartZZaux=(factorPavepartZZaux )^-1 TwoReampZZ/.u->MZ^2+mh^2-s-t//PaVeReduce;*)
 
 
 (* ::Input:: *)
-(*(*The PaVeLimitTo4 command is not defined for rational functions of D, so we multiply by (2-D) and then divide by it again*)*)
-(*(* TODO: need to handle this in general *)*)
+(*(*Use //PaVeLimitTo4 again because //PaVeReduce works in D dim. The 1/(2Pi)^4 is set before*)*)
 
 
 (* ::Input:: *)
-(*PavepartZZ4Daux=(2-D)PaVeLimitTo4[PavepartZZaux]//Contract;*)
-
-
-(* ::Input:: *)
-(*(*and replace D->4. This is our final expression for the prodcut of matrix elements of the NLO calculation*)*)
-
-
-(* ::Input:: *)
-(*PavepartZZ=PavepartZZ4Daux/(2-D)/.D->4;*)
+(*PavepartZZ=PaVeLimitTo4[PavepartZZaux]//Contract;*)
 
 
 (* ::Subsubsection:: *)
@@ -684,8 +715,12 @@
 (*C24s=(1/(4*(Mh^4+(Mz^2-s)^2-2*Mh^2*(Mz^2+s))))*((Mh^4+(Mz^2-s)^2-2*Mh^2*(Mz^2+s))-(Mz^2*(Mh^2-Mz^2+s)+(M1^2-M2^2)*(Mh^2+Mz^2-s))*PaVe[0,{MZ^2},{MH^2,MH^2}]+Mh^2*(Mh^2-Mz^2-s+2*M1^2-2*M2^2)*PaVe[0,{mh^2},{MH^2,MH^2}]+(s*(-Mh^2-Mz^2+s)-(M1^2-M2^2)*(Mh^2-Mz^2+s))*PaVe[0,{s},{MH^2,MH^2}]+(2*(Mh^2*Mz^2*s+(M1^4+M2^4)*Mh^2+M1^2*Mh^2*(Mh^2-Mz^2-s)+M2^2*((Mz^2-s)^2-Mh^2*(Mz^2+s))-2*M1^2*M2^2*Mh^2))*PaVe[0,{mh^2,MZ^2,s},{MH^2,MH^2,MH^2}]);*)
 
 
-(* ::Subsubsection:: *)
-(*Validation with the literature*)
+(* ::Input:: *)
+(*(*The factor of part from eq 3.8 with only PaVe functions, including spin average 1/4 and the sum factor 2*)*)
+
+
+(* ::Input:: *)
+(*factorPavepartliterature=-(1/4)*2*1/(16\[Pi]^2) (4EL^3)/(MZ SW CW) (gv^2+ga^2)/(s-MZ^2)^2 (-lam3*v)(- gc38)^2/.lam3->\[Lambda]3/.gc38->(CW*EL)/SW/.v->(2 SW CW MZ/EL)//FullSimplify;*)
 
 
 (* ::Input:: *)
@@ -693,7 +728,21 @@
 
 
 (* ::Input:: *)
-(*Pavepartliterature=-2((t u +2s MZ^2 -mh^2MZ^2)(2C24s-1/2 PaVe[0,{mh^2},{MH^2,MH^2}])+(s+MZ^2-mh^2)(mh^2MZ^2-t u)(C22s-C23s))/.Mz->MZ/.Mh->mh/.M1->MH/.M2->MH;*)
+(*Pavepartliterature=2((t u +2s MZ^2 -mh^2MZ^2)(2C24s-1/2 PaVe[0,{mh^2},{MH^2,MH^2}])+(s+MZ^2-mh^2)(mh^2MZ^2-t u)(C22s-C23s))/.Mz->MZ/.Mh->mh/.M1->MH/.M2->MH;*)
+
+
+
+(* ::Subsubsection:: *)
+(*Validation with the literature*)
+
+
+(* ::Input:: *)
+(*(*Factor matching*)*)
+
+
+(* ::Input:: *)
+(*factorPavepartliterature==factorPavepartZZaux/.v->(2 SW CW MZ/EL)//Simplify*)
+
 
 
 (* ::Input:: *)
@@ -752,7 +801,8 @@
 (*Indtermliterature==Indterm//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]&*)
 
 
-(* ::Subsection::Closed:: *)
+
+(* ::Subsection:: *)
 (*e + e - \[Gamma] vertex contribution*)
 
 
@@ -761,19 +811,19 @@
 
 
 (* ::Input:: *)
-(*(*Product aiming to get Eq. 3.8, factor of two from 2 times real part*)*)
+(*(*Product aiming to get Eq. 3.8 in D dimension*)*)
 
 
 (* ::Input:: *)
-(*ampsquared\[Gamma]Z=2AmpNLO\[Gamma]Z AmpLO/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.gc44->(FCGV["EL"]^2*v)/(2*FCGV["CW"]^2*FCGV["SW"]^2)//FCGVToSymbol/.ME->0//FeynAmpDenominatorExplicit//FermionSpinSum[#,ExtraFactor->1/2^2]& //DoPolarizationSums[#,k1]&//FCReplaceD[#,D->4-2Epsilon]&//Series[#,{Epsilon,0,0}]&//Normal//ChangeDimension[#,4]&//DiracSimplify;*)
+(*ampsquared\[Gamma]Z=(AmpNLO\[Gamma]Z ComplexConjugate[AmpLO]+AmpLO ComplexConjugate[AmpNLO\[Gamma]Z])/.gc54L->(gv+ga) EL/.gc54R->(gv-ga) EL/.gc44->(EL^2*v)/(2*CW^2*SW^2)//FeynAmpDenominatorExplicit//FermionSpinSum[#,ExtraFactor->1/2^2]& //DoPolarizationSums[#,k1]&;*)
 
 
 (* ::Input:: *)
-(*(*The following Eps[Momentum[k1],Momentum[k2],Momentum[p1],Momentum[p2]]->0 gets rid of the imaginary part of the product, this is a hack for this particular case*)*)
+(*(*D dim -> 4 dim, take ME->0*)*)
 
 
 (* ::Input:: *)
-(*TwoReamp\[Gamma]Z=ampsquared\[Gamma]Z/.Eps[Momentum[k1],Momentum[k2],Momentum[p1],Momentum[p2]]->0/.ME^2->0//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]&;*)
+(*TwoReamp\[Gamma]Z=(1/(2Pi)^4)*(PaVeLimitTo4[ampsquared\[Gamma]Z]//DiracSimplify)/.ME->0//TrickMandelstam[#,{s,t,u,MZ^2+mh^2}]&;*)
 
 
 (* ::Input:: *)
@@ -784,7 +834,8 @@
 (*TwoReamp\[Gamma]Z//FullSimplify//TraditionalForm*)
 
 
-(* ::Subsection::Closed:: *)
+
+(* ::Subsection:: *)
 (*Renormalized propagator*)
 
 
@@ -807,14 +858,28 @@
 
 
 (* ::Input:: *)
-(*\[Rho]Hat=1/(s-MZ^2+I \[CapitalGamma]Z MZ) (1+(Re[\[CapitalSigma]ZZTHatForMZ2]-Re[\[CapitalSigma]ZZTHatFors])/(s-MZ^2)+1/2 \[Delta]ZZZHat-1/2 Re[D\[CapitalSigma]HHatFormh2])/.v->(2 SW CW MZ/EL);*)
+(*\[Rho]Hat=1/(s-MZ^2+I \[CapitalGamma]Z*MZ) (1+(Re[\[CapitalSigma]ZZTHatForMZ2]-Re[\[CapitalSigma]ZZTHatFors])/(s-MZ^2)+1/2 \[Delta]ZZZHat-1/2 Re[D\[CapitalSigma]HHatFormh2])/.v->(2 SW CW MZ/EL);*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Matrix Elements and cross section*)
 
 
 (* ::Input:: *)
+
+(*(*Including \[CapitalGamma]Z in the LO cross section*)*)
+
+
+(* ::Input:: *)
+(*\[Sigma]LOSMaux=Numerator[\[Sigma]LOaux]/(Denominator[\[Sigma]LOaux]/.(MZ^2-s)^2->((MZ^2-s)^2+MZ^2 \[CapitalGamma]Z^2));*)
+
+
+(* ::Input:: *)
+(*\[Sigma]LOSM[s_]:= Evaluate[\[Sigma]LOSMaux]*)
+
+
+(* ::Input:: *)
+
 (*(*NLO matrix element squared from self energies, typo in paper esq 3.1 and 3.7, missing factor of 1/2*)*)
 
 
@@ -835,19 +900,16 @@
 
 
 (* ::Input:: *)
-(*TwoReampZZ=(Numerator[TwoReampZZ])/((Denominator[TwoReampZZ])/.(MZ^2-s)^2->((MZ^2-s)^2+MZ^2 \[CapitalGamma]Z^2));*)
+(*TwoReampZZaux=(Numerator[TwoReampZZ])/((Denominator[TwoReampZZ])/.(MZ^2-s)^2->((MZ^2-s)^2+MZ^2 \[CapitalGamma]Z^2));*)
 
 
 (* ::Input:: *)
-(*TwoReamp\[Gamma]Z=(Numerator[TwoReamp\[Gamma]Z](MZ^2-s))/((Denominator[TwoReamp\[Gamma]Z]*(MZ^2-s))/.(MZ^2-s)^2->((MZ^2-s)^2+MZ^2 \[CapitalGamma]Z^2));*)
+(*TwoReamp\[Gamma]Zaux=(Numerator[TwoReamp\[Gamma]Z](MZ^2-s))/((Denominator[TwoReamp\[Gamma]Z]*(MZ^2-s))/.(MZ^2-s)^2->((MZ^2-s)^2+MZ^2 \[CapitalGamma]Z^2));*)
 
 
 (* ::Input:: *)
-(*(*Interference term*)*)
+(*MvertexMtree=Re[ComplexExpand[N[PaXEvaluate[(TwoReampZZaux+TwoReamp\[Gamma]Zaux)/.v->(2 SW CW MZ/EL)/.u->(MZ^2+mh^2-s-t) ,PaXC0Expand->True]]]];*)
 
-
-(* ::Input:: *)
-(*MvertexMtree=Re[ComplexExpand[N[PaXEvaluate[(TwoReampZZ+TwoReamp\[Gamma]Z)/.v->(2 SW CW MZ/EL)/.u->(MZ^2+mh^2-s-t) ,PaXC0Expand->True]]]];*)
 
 
 (* ::Input:: *)
@@ -862,8 +924,17 @@
 (*\[Sigma]1loop[\[Lambda]3_,MH_,\[Mu]_,s_]:=(1/(16 Pi s^2)*NIntegrate[Mtotcorr2[\[Lambda]3,MH,\[Mu],s,tp],{tp,tLower[s],tUpper[s]}])*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Section:: *)
+(*Plots*)
+
+
+(* ::Subsection:: *)
 (*Constants from PDG 2025*)
+
+
+(* ::Input:: *)
+
+(*Clear[mh,MZ,MW,CW,SW,\[Alpha],EL,gv,ga,\[CapitalGamma]Z,convfactor]*)
 
 
 (* ::Input:: *)
@@ -880,27 +951,12 @@
 (*convfactor=0.3894*10^12;(*from GeV^-2 to fb*)*)
 
 
-(* ::Input:: *)
-(*(*Clear[mh,MZ,MW,CW,SW,\[Alpha],EL,gv,ga,\[CapitalGamma]Z]*)(*For debugging*)*)
-
-
-(* ::Section::Closed:: *)
+(* ::Subsection:: *)
 (*Plots*)
 
 
 (* ::Input:: *)
-(*(*Including \[CapitalGamma]Z in the LO cross section*)*)
 
-
-(* ::Input:: *)
-(*\[Sigma]LOSMaux=Numerator[\[Sigma]LOliterature]/(Denominator[\[Sigma]LOliterature]/.(MZ^2-s)^2->((MZ^2-s)^2+MZ^2 \[CapitalGamma]Z^2));*)
-
-
-(* ::Input:: *)
-(*\[Sigma]LOSM[s_]:= Evaluate[\[Sigma]LOSMaux]*)
-
-
-(* ::Input:: *)
 (*Plot[convfactor \[Sigma]LOSM[s^2],{s,200,400},PlotStyle->{Red},Frame->True,GridLines->Automatic,FrameLabel->{Style["\!\(\*SqrtBox[\(s\)]\)(GeV)",FontSize->18,FontFamily->"Times"],Style["\!\(\*SubscriptBox[\(\[Sigma]\), \(LO\)]\)(fb)",FontSize->18,FontFamily->"Times"]},PlotRange->All,PlotLegends->Placed[{Style["\!\(\*SuperscriptBox[\(e\), \(+\)]\)\!\(\*SuperscriptBox[\(e\), \(-\)]\)\[Rule] Z h",FontFamily->"Times",FontSize->12]},{Right,Top}]]*)
 
 
