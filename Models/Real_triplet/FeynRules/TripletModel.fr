@@ -12,10 +12,10 @@
 M$ModelName = "ReTripletModel";
 
 M$Information = {
-  Authors -> {"Cristian Sierra"},
+  Authors -> {"Cristian Sierra, Qin Yu"},
   Emails -> {"cfsierraf@gmail.com"},
-  Version -> "1.0",
-  Date -> "2025-04-29",
+  Version -> "1.1",
+  Date -> "2025-09-11",
   Institutions -> {"Tsung-Dao Lee Institute"},
   References -> {"arXiv:2104.10709"}
 };

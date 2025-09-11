@@ -33,7 +33,7 @@ M$ExtParams = {
 
 M$Masses = {
 	MD -> 0.,
-	Me -> 0.,
+	ME -> 0.,
 	MM -> 0.1057,
 	Mnue -> 0.,
 	Mnum -> 0.,

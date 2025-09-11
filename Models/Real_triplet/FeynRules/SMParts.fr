@@ -33,7 +33,7 @@ F[2] == {
 	QuantumNumbers   -> {Q ->-1},
 	ClassMembers     -> {e, m, ta},
 	FlavorIndex      -> Generation,
-	Mass		 -> {Ml, {Me, 0.}, {MM, 0.1057}, {MTA, 1.777}},
+	Mass		 -> {Ml, {ME, 0.}, {MM, 0.1057}, {MTA, 1.777}},
 	Width            -> {Wl, {WE, 0}, {WM, 0}, {WTA, 0}},
 	ParticleName     -> {"e", "m", "l"},
 	AntiParticleName -> {"E", "M", "L"},
